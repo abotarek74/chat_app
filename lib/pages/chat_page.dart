@@ -38,13 +38,10 @@ class ChatPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: BlocConsumer<ChatCubit, ChatState>(
-              listener: (context, state) {
-                if (state is ChatSuccess) {
-                  messagesList = state.messages;
-                }
-              },
+            child: BlocBuilder<ChatCubit, ChatState>(
               builder: (context, state) {
+                var messagesList =
+                    BlocProvider.of<ChatCubit>(context).messagesList;
                 return ListView.builder(
                   reverse: true,
                   controller: _controller,
