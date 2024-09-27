@@ -21,12 +21,14 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LoginLoadind) {
+        if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
           Navigator.pushNamed(context, ChatPage.id);
+          isLoading = false;
         } else if (state is LoginFaliure) {
           showSnackBar(context, state.errorMessage);
+          isLoading = false;
         }
       },
       child: ModalProgressHUD(
